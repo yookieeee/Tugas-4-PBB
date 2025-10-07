@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        useMaterial3: true, // Menggunakan Material 3 untuk tampilan yang lebih modern
+        useMaterial3: true,
       ),
       home: const FormMahasiswaScreen(),
       debugShowCheckedModeBanner: false,
@@ -42,7 +42,6 @@ class _FormMahasiswaScreenState extends State<FormMahasiswaScreen> {
 
   @override
   void dispose() {
-    // Jangan lupa untuk membersihkan controller setelah tidak digunakan
     _namaController.dispose();
     _npmController.dispose();
     _emailController.dispose();
@@ -66,7 +65,6 @@ class _FormMahasiswaScreenState extends State<FormMahasiswaScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // --- Input NPM ---
                 TextFormField(
                   controller: _npmController,
                   decoration: const InputDecoration(
@@ -85,7 +83,6 @@ class _FormMahasiswaScreenState extends State<FormMahasiswaScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // --- Input Nama ---
                 TextFormField(
                   controller: _namaController,
                   decoration: const InputDecoration(
@@ -102,7 +99,6 @@ class _FormMahasiswaScreenState extends State<FormMahasiswaScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // --- Input Email ---
                 TextFormField(
                   controller: _emailController,
                   decoration: const InputDecoration(
@@ -116,11 +112,9 @@ class _FormMahasiswaScreenState extends State<FormMahasiswaScreen> {
                     if (value == null || value.isEmpty) {
                       return 'Email tidak boleh kosong';
                     }
-                    // Validasi format email umum
                     if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
                       return 'Masukkan format email yang valid';
                     }
-                    // Validasi domain khusus @unsika.ac.id
                     if (!value.endsWith('@unsika.ac.id')) {
                       return 'Hanya domain @unsika.ac.id yang diperbolehkan';
                     }
@@ -129,7 +123,6 @@ class _FormMahasiswaScreenState extends State<FormMahasiswaScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // --- Input Nomor HP ---
                 TextFormField(
                   controller: _noHpController,
                   decoration: const InputDecoration(
@@ -144,8 +137,6 @@ class _FormMahasiswaScreenState extends State<FormMahasiswaScreen> {
                     if (value == null || value.isEmpty) {
                       return 'Nomor HP tidak boleh kosong';
                     }
-                    // Validasi hanya angka sudah diatasi oleh inputFormatters
-                    // Validasi minimal 10 digit
                     if (value.length < 10) {
                       return 'Nomor HP minimal harus 10 digit';
                     }
@@ -154,7 +145,6 @@ class _FormMahasiswaScreenState extends State<FormMahasiswaScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // --- Input Jenis Kelamin ---
                 DropdownButtonFormField<String>(
                   value: _jenisKelamin,
                   decoration: const InputDecoration(
@@ -183,12 +173,9 @@ class _FormMahasiswaScreenState extends State<FormMahasiswaScreen> {
                 ),
                 const SizedBox(height: 30),
 
-                // --- Tombol Simpan ---
                 ElevatedButton.icon(
                   onPressed: () {
-                    // Cek apakah form valid
                     if (_formKey.currentState!.validate()) {
-                      // Jika valid, tampilkan dialog sukses
                       showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
